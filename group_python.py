@@ -33,7 +33,7 @@ for i in range (10):
     total_student_by_group["group"+str(i+1)] = {}
 print(total_student_by_group)
 
-# 조 지정 대조 딕셔너리
+# group compare dict
 assign_dict = {}
 for i in range (10):
     assign_dict[i+1] = "group"+str(i+1)
