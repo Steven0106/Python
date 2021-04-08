@@ -3,7 +3,7 @@ from openpyxl import Workbook
 from glob import *
 import os
 
-# 기존 파일이 있으면 삭제.
+# 기존 파일이 있으면 삭제해주는 역할
 try:
     os.remove("group_python.xlsx")
 except:
@@ -39,7 +39,7 @@ for i in range (10):
     assign_dict[i+1] = "group"+str(i+1)
 print(assign_dict)
 
-# 현재까지 총 학생 수.
+# 현재까지 총 학생 수
 student_number_tracker = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 print(total_student)
@@ -64,7 +64,7 @@ print(student_number_tracker)
 # print(my_worksheet['D2'].value)
 
 
-### 출력 영역
+### 출력 영역 ###
 my_writing_wb = Workbook()
 
 # 10개의 시트 제작.
@@ -90,5 +90,5 @@ for i in range(10):
 
 my_writing_wb.remove(my_writing_wb['Sheet'])
 
-# 최종적으로 파일을 현재 py 파일과 같은 폴더에 저장.
+# 최종적으로 파일을 현재 py 파일과 같은 폴더에 저장
 my_writing_wb.save("group_python.xlsx")
