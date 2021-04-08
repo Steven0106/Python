@@ -3,7 +3,7 @@ from openpyxl import Workbook
 from glob import *
 import os
 
-# 기존 파일이 있으면 삭제해주는 역할
+# delete current print
 try:
     os.remove("group_python.xlsx")
 except:
@@ -13,7 +13,7 @@ except:
 Myfiles = [i for i in glob('*.xlsx')]
 # print(Myfiles)
 total_student = []
-# 각 파일에서 학생 정보 저장.
+# save info per files
 for item in Myfiles:
     my_workbook = load_workbook(item, data_only = True)
     my_worksheet = my_workbook['Sheet1']
@@ -27,7 +27,7 @@ for item in Myfiles:
 
 
 
-# 전체 학생 그룹별 딕셔너리
+# all dict for student
 total_student_by_group = {}
 for i in range (10):
     total_student_by_group["group"+str(i+1)] = {}
@@ -43,7 +43,7 @@ print(assign_dict)
 student_number_tracker = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 print(total_student)
-# 학생 조에 따라 분류
+# sort stud by group
 for item in total_student:
     group = item[2]
     group_name = assign_dict[group]
@@ -63,22 +63,21 @@ print(student_number_tracker)
 # print(my_worksheet['C2'].value)
 # print(my_worksheet['D2'].value)
 
-
-### 출력 영역 ###
+####
 my_writing_wb = Workbook()
 
-# 10개의 시트 제작.
+# make 10 sheet
 for i in range(10):
     write_ws = my_writing_wb.create_sheet("jo"+str(i+1))
 
-# 실제 엑셀 출력 해주는 곳
+# part for print in excel
 for i in range(10):
-    # 현재 쓰고자 하는 워크시트 로딩
+    # get current using worksheet
     load_ws = my_writing_wb["jo"+str(i+1)]
-    # 헤더 추가 (표 맨 위에 오는 정보)
+    # add header
     load_ws.append(["stu_num", "name", "group_id", "git"])
 
-    # 임시로 각 조원들의 데이터 저장
+    # save group temp
     tempList = list(total_student_by_group["group"+str(i+1)].values())
     print(tempList)
     for j in range(4):
@@ -90,5 +89,5 @@ for i in range(10):
 
 my_writing_wb.remove(my_writing_wb['Sheet'])
 
-# py 파일과 같은 폴더에 저장
+# save in same folder with py
 my_writing_wb.save("group_python.xlsx")
